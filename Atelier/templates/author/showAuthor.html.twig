@@ -1,0 +1,25 @@
+<h1>Details of Authors</h1>
+
+<table border="1" >
+    <tr>
+        <td>Name</td>
+        <td>Picture</td>
+        <td>Email</td>
+        <td>Books</td>
+    </tr>
+
+
+            {% for author in tabAuthors %}
+            {% if author.id == id %}
+    <tr>
+
+        <td>{{author.username|upper}}</td>
+        <td><img src="{{ asset(author.picture) }}" alt="author" height="170px" width="170px"></td>
+        <td>{{author.email}}</td>
+        <td> {{author.nb_books}}</td>
+
+
+    </tr>
+            {% endif %}
+            {% endfor %}
+</table>
