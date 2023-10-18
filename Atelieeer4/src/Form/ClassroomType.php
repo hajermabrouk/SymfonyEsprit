@@ -15,13 +15,7 @@ class ClassroomType extends AbstractType
         $builder
         ->add('name', TextType::class, [
             'label' => 'Name',
-        ])
-        ->add('save', SubmitType::class, [
-            'label' => 'Ajouter',
-          
-        ])
-        ->add('save', SubmitType::class, [
-            'label' => 'Modifier',
+       
           
         ]);
     }

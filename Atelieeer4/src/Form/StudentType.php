@@ -30,9 +30,7 @@ class StudentType extends AbstractType
                 'class' => Classroom::class,
                 'choice_label' => 'name', // Spécifiez le champ qui doit être affiché comme étiquette
                 'label' => 'Classroom',
-            ])
-            ->add('save', SubmitType::class, [
-                'label' => 'Ajouter',
+           
             ]);
     }
 
