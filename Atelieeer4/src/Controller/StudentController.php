@@ -8,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Form\StudentType;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 class StudentController extends AbstractController
@@ -22,14 +23,14 @@ class StudentController extends AbstractController
     }
 
     #[Route('/Add-student', name: 'Add_student')]
-    public function AddStudent(Request $request): Response
+    public function AddStudent(EntityManagerInterface $em,Request $request): Response
     {
         $student = new Student();
         $form = $this->createForm(StudentType::class, $student);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
+            
             $em->persist($student);
             $em->flush();
 
@@ -43,7 +44,7 @@ class StudentController extends AbstractController
     }
 
     #[Route('/edit-student/{id}', name: 'edit_student')]
-    public function editStudent(StudentRepository $repository, $id, Request $request)
+    public function editStudent(EntityManagerInterface $em,StudentRepository $repository, $id, Request $request)
     {
         $student = $repository->find($id);
 
@@ -55,7 +56,7 @@ class StudentController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
+        
             $em->flush();
 
             return $this->redirectToRoute("list_student");
@@ -68,7 +69,7 @@ class StudentController extends AbstractController
     }
 
     #[Route('/delete-student/{id}', name: 'delete_student')]
-    public function deleteStudent($id, StudentRepository $repository)
+    public function deleteStudent($id, EntityManagerInterface $em,StudentRepository $repository)
     {
         $student = $repository->find($id);
 
@@ -76,10 +77,11 @@ class StudentController extends AbstractController
             throw $this->createNotFoundException('Étudiant non trouvé');
         }
 
-        $em = $this->getDoctrine()->getManager();
+     
         $em->remove($student);
         $em->flush();
 
         return $this->redirectToRoute("list_student");
     }
+   
 }

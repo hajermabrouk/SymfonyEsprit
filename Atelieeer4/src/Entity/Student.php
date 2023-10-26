@@ -3,39 +3,36 @@
 namespace App\Entity;
 
 use App\Repository\StudentRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass=StudentRepository::class)
- */
+#[ORM\Entity(repositoryClass: StudentRepository::class)]
 class Student
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
-    private $id;
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    private ?int $id = null;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $Name;
+    #[ORM\Column(length: 255)]
+    private ?string $Name = null;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $Email;
+    #[ORM\Column(length: 255)]
+    private ?string $Email = null;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $Age;
+    #[ORM\Column]
+    private ?int $Age = null;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Classroom::class, inversedBy="students")
-     */
-    private $classroom;
+    #[ORM\ManyToOne(inversedBy: 'students')]
+    private ?Classroom $classroom = null;
+
+   
+
+    public function __construct()
+    {
+        //$this->clubs = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -47,7 +44,7 @@ class Student
         return $this->Name;
     }
 
-    public function setName(string $Name): self
+    public function setName(string $Name): static
     {
         $this->Name = $Name;
 
@@ -59,7 +56,7 @@ class Student
         return $this->Email;
     }
 
-    public function setEmail(string $Email): self
+    public function setEmail(string $Email): static
     {
         $this->Email = $Email;
 
@@ -71,7 +68,7 @@ class Student
         return $this->Age;
     }
 
-    public function setAge(int $Age): self
+    public function setAge(int $Age): static
     {
         $this->Age = $Age;
 
@@ -83,10 +80,16 @@ class Student
         return $this->classroom;
     }
 
-    public function setClassroom(?Classroom $classroom): self
+    public function setClassroom(?Classroom $classroom): static
     {
         $this->classroom = $classroom;
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, Club>
+     */
+    
+
 }

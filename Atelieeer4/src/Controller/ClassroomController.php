@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Form\ClassroomType;
 use Symfony\Component\HttpFoundation\Request;
-
+use Doctrine\ORM\EntityManagerInterface;
 
 class ClassroomController extends AbstractController
 {
@@ -32,14 +32,14 @@ class ClassroomController extends AbstractController
 
    
     #[Route('/Add', name: 'Add')]
-    public function Add(Request $request): Response
+    public function Add(EntityManagerInterface $em,Request $request): Response
 {
     $classroom = new Classroom();
     $form = $this->createForm(ClassroomType::class, $classroom);
     $form->handleRequest($request);
 
     if ($form->isSubmitted() && $form->isValid()) {
-        $em = $this->getDoctrine()->getManager();
+     
         $em->persist($classroom);
         $em->flush();
 
@@ -52,7 +52,7 @@ class ClassroomController extends AbstractController
     ]);
 }
 #[Route('/edit/{id}', name: 'edit')]
-public function edit(ClassroomRepository $repository, $id, Request $request)
+public function edit(ClassroomRepository $repository, $id, EntityManagerInterface $em,Request $request)
 {
     $classroom = $repository->find($id);
 
@@ -64,7 +64,7 @@ public function edit(ClassroomRepository $repository, $id, Request $request)
     $form->handleRequest($request);
 
     if ($form->isSubmitted() && $form->isValid()) {
-        $em = $this->getDoctrine()->getManager();
+       
         $em->flush();
 
         return $this->redirectToRoute("list");
@@ -80,7 +80,7 @@ public function edit(ClassroomRepository $repository, $id, Request $request)
 
 
 #[Route('/delete/{id}', name: 'delete')]
-public function delete($id, ClassroomRepository $repository)
+public function delete($id,EntityManagerInterface $em, ClassroomRepository $repository)
 {
     
     $classroom = $repository->find($id);
@@ -89,7 +89,7 @@ public function delete($id, ClassroomRepository $repository)
     }
 
    
-    $em = $this->getDoctrine()->getManager();
+   
     $em->remove($classroom);
     $em->flush();
     return $this->redirectToRoute("list");

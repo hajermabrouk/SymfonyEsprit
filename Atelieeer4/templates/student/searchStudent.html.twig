@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Liste des étudiants</title>
+</head>
+<body>
+    <h1>Liste des étudiants</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nom</th>
+                <th>Email</th>
+                <th>Age</th>
+                <th>Classroom</th>
+             
+            </tr>
+        </thead>
+        <tbody>
+            {% for student in student %}
+                <tr>
+                    <td>{{ student.id }}</td>
+                    <td>{{ student.name }}</td>
+                    <td>{{ student.email }}</td>
+                    <td>{{ student.age }}</td>
+                    <td>{{ student.classroom }}</td>
+                  
+                </tr>
+            {% endfor %}
+            <form method="post" action ="/dql">
+            <label>search</label>
+            <input type="text" name="test"></input>
+             <input type="submit" value="search"></input>
+
+
+            </form>
+
+
+
+
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+    
+</body>
+</html>

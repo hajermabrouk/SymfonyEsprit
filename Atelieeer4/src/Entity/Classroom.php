@@ -7,33 +7,26 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass=ClassroomRepository::class)
- */
+#[ORM\Entity(repositoryClass: ClassroomRepository::class)]
 class Classroom
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
-    private $id;
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    private ?int $id = null;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $name;
+    #[ORM\Column(length: 255)]
+    private ?string $name = null;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Student::class, mappedBy="classroom")
-     */
-    private $students;
+    #[ORM\OneToMany(mappedBy: 'classroom', targetEntity: Student::class)]
+    private Collection $students;
 
     public function __construct()
     {
         $this->students = new ArrayCollection();
     }
 
+   
     public function getId(): ?int
     {
         return $this->id;
@@ -44,7 +37,7 @@ class Classroom
         return $this->name;
     }
 
-    public function setName(string $name): self
+    public function setName(string $name): static
     {
         $this->name = $name;
 
@@ -52,24 +45,24 @@ class Classroom
     }
 
     /**
-     * @return Collection|Student[]
+     * @return Collection<int, Student>
      */
     public function getStudents(): Collection
     {
         return $this->students;
     }
 
-    public function addStudent(Student $student): self
+    public function addStudent(Student $student): static
     {
         if (!$this->students->contains($student)) {
-            $this->students[] = $student;
+            $this->students->add($student);
             $student->setClassroom($this);
         }
 
         return $this;
     }
 
-    public function removeStudent(Student $student): self
+    public function removeStudent(Student $student): static
     {
         if ($this->students->removeElement($student)) {
             // set the owning side to null (unless already changed)
@@ -81,8 +74,9 @@ class Classroom
         return $this;
     }
 
-    public function __toString()
-    {
-        return $this->name;
-    }
+   //ttzed ki khdmna student
+   public function __toString()
+   {
+    return $this->name;
+   }
 }

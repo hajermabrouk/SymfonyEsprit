@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8ffd49451c1c4b4f3402971b65fd6393",
+    "content-hash": "3750fa785f6aadd73cd1be88f16d088c",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -1463,6 +1463,37 @@
                 }
             ],
             "time": "2023-01-14T14:17:03+00:00"
+        },
+        {
+            "name": "jadob/bridge-doctrine-annotations",
+            "version": "v0.4.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jadob/bridge-doctrine-annotations.git",
+                "reference": "aefc7da9866d032d8b644cb4135824262ef3adac"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jadob/bridge-doctrine-annotations/zipball/aefc7da9866d032d8b644cb4135824262ef3adac",
+                "reference": "aefc7da9866d032d8b644cb4135824262ef3adac",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Jadob\\Bridge\\Doctrine\\Annotations\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "doctrine/annotations Bridge",
+            "support": {
+                "issues": "https://github.com/jadob/bridge-doctrine-annotations/issues",
+                "source": "https://github.com/jadob/bridge-doctrine-annotations/tree/v0.4.1"
+            },
+            "time": "2022-02-03T02:50:59+00:00"
         },
         {
             "name": "monolog/monolog",
