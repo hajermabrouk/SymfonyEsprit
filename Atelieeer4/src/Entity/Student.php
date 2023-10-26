@@ -3,8 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\StudentRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: StudentRepository::class)]
@@ -16,23 +14,18 @@ class Student
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $Name = null;
+    private ?string $name = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $Email = null;
+    private ?string $email = null;
 
     #[ORM\Column]
-    private ?int $Age = null;
+    private ?int $age = null;
 
     #[ORM\ManyToOne(inversedBy: 'students')]
+    #[ORM\JoinColumn(name:'nc_id' , referencedColumnName:'ref',nullable: false)]
+
     private ?Classroom $classroom = null;
-
-   
-
-    public function __construct()
-    {
-        //$this->clubs = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -41,36 +34,36 @@ class Student
 
     public function getName(): ?string
     {
-        return $this->Name;
+        return $this->name;
     }
 
-    public function setName(string $Name): static
+    public function setName(string $name): static
     {
-        $this->Name = $Name;
+        $this->name = $name;
 
         return $this;
     }
 
     public function getEmail(): ?string
     {
-        return $this->Email;
+        return $this->email;
     }
 
-    public function setEmail(string $Email): static
+    public function setEmail(string $email): static
     {
-        $this->Email = $Email;
+        $this->email = $email;
 
         return $this;
     }
 
     public function getAge(): ?int
     {
-        return $this->Age;
+        return $this->age;
     }
 
-    public function setAge(int $Age): static
+    public function setAge(int $age): static
     {
-        $this->Age = $Age;
+        $this->age = $age;
 
         return $this;
     }
@@ -86,10 +79,4 @@ class Student
 
         return $this;
     }
-
-    /**
-     * @return Collection<int, Club>
-     */
-    
-
 }
