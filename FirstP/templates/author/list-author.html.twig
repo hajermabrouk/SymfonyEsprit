@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>List Authors</title>
+</head>
+<body>
+    <h1>List Authors</h1>
+    <table border="1">
+        <thead>
+            <tr>
+             
+                <th>Username</th>
+                 <th>Email</th>
+                 <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for author in response %}
+                <tr>
+                 
+                    <td>{{ author.username }}</td>
+                    <td>{{ author.email}}</td>
+                    <td>
+                        <a href="{{ path('edit_author', {id: author.id}) }}">Edit</a>
+                        <a href="{{ path('delete_author', {id: author.id}) }}">Delete</a>
+                    </td>
+                  
+
+                
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+     <a href="{{ path('Add_author') }}" class="btn btn-primary">Ajouter un auteur</a>
+</body>
+
+
+</html>

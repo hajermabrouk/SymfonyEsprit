@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>List of Books</title>
+</head>
+<body>
+    <h1>List of Books</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Category</th>
+                <th>Publication Date</th>
+                <th>Published</th>
+                <th>Author</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for book in result %}
+                <tr>
+                    <td>{{ book.title }}</td>
+                    <td>{{ book.category }}</td>
+                    <td>{{ book.publicationDate|date('Y-m-d') }}</td>
+                    <td>{{ book.published ? 'Yes' : 'No' }}</td>
+                    <td>{{ book.author.username }}</td> {# Utilisez la propriété "name" de l'auteur #}
+                    <td>
+                        <a href="{{ path('edit_book', {ref: book.ref}) }}">Edit</a>
+                        <a href="{{ path('delete_book', {ref: book.ref}) }}">Delete</a>
+                        <a href="{{ path('show_book', {ref: book.ref}) }}">Show</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <p>Number of published books: {{ numPublishedBooks }}</p>
+    <p>Number of Unpublished books: {{ numUnPublishedBooks }}</p>
+    <a href="{{ path('Add_book') }}" class="btn btn-primary">Add a Book</a>
+</body>
+</html>
+
